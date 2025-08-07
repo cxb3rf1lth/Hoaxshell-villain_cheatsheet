@@ -1,11 +1,11 @@
 
 This enhanced guide provides complete command strings, interactive inputs, and operational notes to generate a wide arsenal of payloads using Villain inside Kali Linux. These payloads are tailored for red team exercises, evasion testing, and malware lab experimentation.
 
-> ⚠️ **Strictly for legal, isolated environments.** Unauthorized use is a crime.
+>  **Strictly for legal, isolated environments.** Unauthorized use is a crime.
 
 ---
 
-## 🧪 Starting Villain C2 Framework
+##  Starting Villain C2 Framework
 
 ```bash
 cd ~/tools/Villain
@@ -26,7 +26,7 @@ exit               # Exits Villain
 
 ---
 
-## ⚔️ Payload Generation Recipes
+##  Payload Generation Recipes
 
 Below are examples of command sequences and outputs for various payloads.
 
@@ -175,7 +175,7 @@ Usage: replace a trusted service binary path with the compiled output.
 
 ---
 
-## 🧬 Obfuscation Enhancements
+##  Obfuscation Enhancements
 
 ### PowerShell AMSI Bypass (Inject Inline)
 
@@ -206,7 +206,7 @@ Invoke-Obfuscation
 
 ---
 
-## 🛡️ Delivery Options
+##  Delivery Options
 
 |Vector|Tool Required|Notes|
 |---|---|---|
@@ -218,7 +218,7 @@ Invoke-Obfuscation
 
 ---
 
-## 🧼 Cleanup Checklist
+##  Cleanup Checklist
 
 - `Ctrl+C` to stop Villain
     
@@ -229,7 +229,7 @@ Invoke-Obfuscation
 
 ---
 
-## ✅ Final Touch Checklist
+##  Final Touch Checklist
 
 -  Villain started and reachable
     
@@ -246,11 +246,11 @@ Invoke-Obfuscation
 
 This comprehensive, upgraded guide expands the Villain C2 framework’s usage into a full-featured offensive payload platform for advanced red teaming, adversary simulation, and secure lab deployment.
 
-> ⚠️ **Strictly for legal red teaming, penetration testing, and isolated lab use only.**
+>  **Strictly for legal red teaming, penetration testing, and isolated lab use only.**
 
 ---
 
-## 🧪 Launching Villain with Robust Options
+##  Launching Villain with Robust Options
 
 ```bash
 cd ~/tools/Villain
@@ -265,7 +265,7 @@ Options:
 
 ---
 
-## 💡 Core Villain CLI Commands
+##  Core Villain CLI Commands
 
 ```bash
 help                   # Show all commands
@@ -282,7 +282,7 @@ exit                   # Exit Villain CLI
 
 ---
 
-## 🎯 Payload Generator Deep Dive
+##  Payload Generator Deep Dive
 
 ### Supported Payloads
 
@@ -316,7 +316,7 @@ generate
 
 ---
 
-## ⚔️ Full Payload Menu with Execution Modes
+##  Full Payload Menu with Execution Modes
 
 ### 1. PowerShell
 
@@ -428,7 +428,7 @@ func();
 
 ---
 
-## 🧬 Obfuscation & Defense Evasion
+##  Obfuscation & Defense Evasion
 
 ### PowerShell AMSI Bypass
 
@@ -457,7 +457,7 @@ powershell -enc <base64encodedstring>
 
 ---
 
-## 📦 Delivery Vectors & Drop Methods
+##  Delivery Vectors & Drop Methods
 
 | Method       | Example Command                                        | Notes                     |
 | ------------ | ------------------------------------------------------ | ------------------------- |
@@ -471,7 +471,7 @@ powershell -enc <base64encodedstring>
 
 ---
 
-## 🧼 Cleanup Actions
+## Cleanup Actions
 
 ```bash
 rm -rf *.hta *.vbs *.js *.ps1 *.dll *.exe *.iso *.sct *.pyc __pycache__/
@@ -486,7 +486,7 @@ Remove-Item -Path "$env:TEMP\*" -Force -Recurse
 
 ---
 
-## ✅ Final Execution Flow
+## Final Execution Flow
 
 1. Start Villain C2 server
 2. Generate appropriate payload with `generate`
@@ -497,7 +497,7 @@ Remove-Item -Path "$env:TEMP\*" -Force -Recurse
 
 ---
 
-## 🚀 Advanced Additions (To Explore)
+##  Advanced Additions (To Explore)
 
 * [ ] Integrate Metasploit session bridge
 * [ ] Add obfuscated Empire stager compatibility
